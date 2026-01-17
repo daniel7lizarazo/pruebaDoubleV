@@ -1,0 +1,11 @@
+<p>users works!</p>
+@if (usersResponse().length > 0) {
+@for (user of usersResponse(); track user.id) {
+<p>{{user.id}}</p>
+<p>{{user.user}}</p>
+<p>{{user.fechaCreacion}}</p>
+}
+}
+@else {
+<p>empty users list</p>
+}

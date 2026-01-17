@@ -1,0 +1,14 @@
+<p-menubar [model]="items">
+  <ng-template #start>
+    <h4>DoubleV-Daniel</h4>
+  </ng-template>
+  <ng-template #item let-item let-root="root">
+    <a pRipple class="menu-item" [href]="item.routerLink">
+      <i [class]="item.icon"></i>
+      <span class="menu-item-label">{{ item.label }}</span>
+    </a>
+  </ng-template>
+  <ng-template #end>
+  </ng-template>
+</p-menubar>
+<router-outlet />
