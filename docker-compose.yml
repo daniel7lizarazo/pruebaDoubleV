@@ -1,0 +1,52 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Pass123.
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql # Persistent volume for SQL Server
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "localhost", "-C", "-U", "sa", "-P", "Pass123.", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+
+  server:
+    build: ./server
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development 
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=DoublevDb;User=sa;Password=Pass123.;TrustServerCertificate=True
+    depends_on:
+      sqlserver:
+        condition: service_healthy # Wait until the DB is actually ready
+    networks:
+      - backend-network
+      - fontend-network
+    restart: on-failure
+
+  client:
+    build: ./client
+    ports:
+      - "4200:80"
+    networks:
+      - fontend-network
+    depends_on:
+      - server
+
+
+networks:
+  backend-network:
+    driver: bridge
+  fontend-network:
+    driver: bridge
+    
+volumes:
+  sql-data:
