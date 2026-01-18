@@ -1,11 +1,35 @@
-<p>users works!</p>
-@if (usersResponse().length > 0) {
-@for (user of usersResponse(); track user.id) {
-<p>{{user.id}}</p>
-<p>{{user.user}}</p>
-<p>{{user.fechaCreacion}}</p>
-}
-}
-@else {
-<p>empty users list</p>
-}
+<form (submit)="onSubmit($event)">
+
+  <p-floatlabel variant="on">
+    <input id="loginForm.user" type="text" [formField]="loginForm.user">
+    <label for="loginForm.user">Usuario</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input id="loginForm.pass" type="password" [formField]="loginForm.pass">
+    <label for="loginForm.pass">Contraseña</label>
+
+  </p-floatlabel>
+
+  <p-button type="submit" label="Crear"></p-button>
+
+</form>
+
+<p-table [value]="usersResponse.value()" [tableStyle]="{ 'min-width': '50rem' }">
+
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Usuario</th>
+      <th>Fecha de creación</th>
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-user>
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.user }}</td>
+      <td>{{ user.fechaCreacion }}</td>
+    </tr>
+  </ng-template>
+</p-table>
