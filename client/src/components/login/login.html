@@ -1,0 +1,17 @@
+<form (submit)="onSubmit($event)">
+  <h1>Inicia sesión</h1>
+
+  <p-floatlabel variant="on">
+    <input id="loginForm.user" type="text" [formField]="loginForm.user">
+    <label for="loginForm.user">Usuario</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input id="loginForm.pass" type="password" [formField]="loginForm.pass">
+    <label for="loginForm.pass">Contraseña</label>
+
+  </p-floatlabel>
+
+  <p-button type="submit" label="Iniciar sesión"></p-button>
+
+</form>

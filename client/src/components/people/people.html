@@ -1,1 +1,54 @@
-<p>people works!</p>
+<form (submit)="onSubmit($event)">
+
+  <p-floatlabel variant="on">
+    <input id="loginForm.nombres" type="text" [formField]="peopleForm.nombres">
+    <label for="loginForm.nombres">Nombres</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input id="peopleForm.apellidos" type="text" [formField]="peopleForm.apellidos">
+    <label for="peopleForm.apellidos">Apellidos</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input id="peopleForm.email" type="email" [formField]="peopleForm.email">
+    <label for="peopleForm.email">Email</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input id="peopleForm.numeroIdentificacion" type="text" [formField]="peopleForm.numeroIdentificacion">
+    <label for="peopleForm.numeroIdentificacion"># de Identificación</label>
+  </p-floatlabel>
+
+  <p-floatlabel variant="on">
+    <input id="peopleForm.tipoIdentificacion" type="text" [formField]="peopleForm.tipoIdentificacion">
+    <label for="peopleForm.tipoIdentificacion">Tipo de identificación</label>
+  </p-floatlabel>
+
+  <p-button type="submit" label="Crear"></p-button>
+
+</form>
+
+<p-table [value]="peopleResponse.value()" [tableStyle]="{ 'min-width': '50rem' }">
+
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Nombre Completo</th>
+      <th>Email</th>
+      <th>Identificación</th>
+      <th>Fecha de creación</th>
+    </tr>
+  </ng-template>
+
+  <ng-template #body let-person>
+    <tr>
+      <td>{{ person.id }}</td>
+      <td>{{ person.nombreCompleto }}</td>
+      <td>{{ person.email }}</td>
+      <td>{{ person.identificacionCompleta }}</td>
+      <td>{{ person.fechaCreacion }}</td>
+    </tr>
+  </ng-template>
+
+</p-table>
